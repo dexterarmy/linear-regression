@@ -1,0 +1,20 @@
+name: CML
+on: [push]
+jobs:
+  train-and-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: iterative/setup-cml@v1
+      - uses: actions/checkout@v3
+      - name: Train model
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pip install -r requirements.txt
+          python3 src/code.py # generate plot.png
+
+          echo "# CML report" >> report.md
+          cat metrics.txt >> report.md
+          # echo '![](./model_1.png "crim vs medv linear regression in blue")' >> report.md
+          # echo '![](./model_2.png "lstat vs medv linear regression in red")' >> report.md
+          cml comment create report.md
