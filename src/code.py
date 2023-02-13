@@ -18,7 +18,6 @@ y_pred[0:5]
 model_1=mean_squared_error(y_test,y_pred)
 print(model_1)
 
-# Plot the results of the first linear regression
 plt.scatter(x_test, y_test, color='black')
 plt.plot(x_test, y_pred, color='blue', linewidth=3)
 plt.xlabel("crim")
